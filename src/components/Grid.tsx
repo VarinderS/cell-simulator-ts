@@ -82,6 +82,26 @@ function createNextGeneration(grid: boolean[][]) {
   return gridCopy;
 }
 
+// https://overreacted.io/making-setinterval-declarative-with-react-hooks/
+function useInterval(callback: () => void, delay: number | null) {
+  const savedCallback = React.useRef(callback);
+
+  // Remember the latest callback.
+  React.useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  // Set up the interval.
+  React.useEffect(() => {
+    function tick() {
+      savedCallback.current();
+    }
+    if (delay !== null) {
+      let id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
 
 const INITIAL_GRID = [
   [false, false, false, false, false, false],
@@ -96,6 +116,14 @@ function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
   const [grid, setGrid] = React.useState<boolean[][]>(INITIAL_GRID);
   const [isSimulationRunning, setIsSimulationRunning] =
     React.useState<boolean>(false);
+
+  useInterval(
+    () => {
+      const nextGenerationGrid = createNextGeneration(grid);
+      setGrid(nextGenerationGrid);
+    },
+    isSimulationRunning ? 200 : null,
+  );
 
   function toggleCellAtLocation({
     rowIndex,
