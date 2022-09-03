@@ -126,40 +126,48 @@ function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
   }
 
   return (
-    <div className="flex flex-col gap-0.5">
-      {grid.map((gridCells, rowIndex) => {
-        const rowName = `row-${rowIndex}`;
-        return (
-          <div key={rowName} className="flex gap-0.5">
-            {gridCells.map((cell, columnIndex) => {
-              const cellName = `cell-${columnIndex}`;
-              const testid = `${rowIndex}-${columnIndex}`;
-              return (
-                <button
-                  key={cellName}
-                  data-testid={testid}
-                  className={classNames(
-                    "transition",
-                    "flex items-center justify-center",
-                    "w-12 h-12",
-                    "bg-gray-100",
-                    { "bg-blue-500 text-white": cell },
-                  )}
-                  onClick={() =>
-                    toggleCellAtLocation({ rowIndex, columnIndex })
-                  }
-                >
-                  {debug && (
-                    <span>
-                      {columnIndex} {rowIndex}
-                    </span>
-                  )}
-                </button>
-              );
-            })}
-          </div>
-        );
-      })}
+    <div>
+      <button onClick={onToggleSimulationClick}>
+        {isSimulationRunning ? "Stop" : "Start"}
+      </button>
+      <button onClick={onNextGenerationButtonClick}>Next</button>
+      <button onClick={onResetClick}>Reset</button>
+
+      <div className="flex flex-col gap-0.5">
+        {grid.map((gridCells, rowIndex) => {
+          const rowName = `row-${rowIndex}`;
+          return (
+            <div key={rowName} className="flex gap-0.5">
+              {gridCells.map((cell, columnIndex) => {
+                const cellName = `cell-${columnIndex}`;
+                const testid = `${rowIndex}-${columnIndex}`;
+                return (
+                  <button
+                    key={cellName}
+                    data-testid={testid}
+                    className={classNames(
+                      "transition",
+                      "flex items-center justify-center",
+                      "w-12 h-12",
+                      "bg-gray-100",
+                      { "bg-blue-500 text-white": cell },
+                    )}
+                    onClick={() =>
+                      toggleCellAtLocation({ rowIndex, columnIndex })
+                    }
+                  >
+                    {debug && (
+                      <span>
+                        {rowIndex} {columnIndex}
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
