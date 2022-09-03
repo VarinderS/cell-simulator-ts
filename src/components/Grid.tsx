@@ -25,34 +25,30 @@ function getAliveNeighborsCount({
   const totalCells = row.length;
 
   const northernRowIndex = (rowIndex - 1) % totalRows;
-  const northernRow = grid.at(northernRowIndex);
-
-  const centralRow = row;
-
   const southernRowIndex = (rowIndex + 1) % totalRows;
+
+  const easternColumnIndex = (columnIndex + 1) % totalCells;
+  const westernColumnIndex = (columnIndex - 1) % totalCells;
+
+  const northernRow = grid.at(northernRowIndex);
+  const centralRow = row;
   const southernRow = grid.at(southernRowIndex);
 
   const northernNeighbor = northernRow?.at(columnIndex);
 
-  const northEasternColumnIndex = (columnIndex + 1) % totalCells;
-  const northEasternNeighbor = northernRow?.at(northEasternColumnIndex);
+  const northEasternNeighbor = northernRow?.at(easternColumnIndex);
 
-  const easternColumnIndex = (columnIndex + 1) % totalCells;
   const easternNeighbor = centralRow.at(easternColumnIndex);
 
-  const southEasternColumnIndex = (columnIndex + 1) % totalCells;
-  const southEasternNeighbor = southernRow?.at(southEasternColumnIndex);
+  const southEasternNeighbor = southernRow?.at(easternColumnIndex);
 
   const southernNeighbor = southernRow?.at(columnIndex);
 
-  const southWesternColumnIndex = (columnIndex - 1) % totalCells;
-  const southWesternNeighbor = southernRow?.at(southWesternColumnIndex);
+  const southWesternNeighbor = southernRow?.at(westernColumnIndex);
 
-  const westernColumnIndex = (columnIndex - 1) % totalCells;
   const westernNeighbor = centralRow?.at(westernColumnIndex);
 
-  const northWesternColumnIndex = (columnIndex - 1) % totalCells;
-  const northWesternNeighbor = northernRow?.at(northWesternColumnIndex);
+  const northWesternNeighbor = northernRow?.at(westernColumnIndex);
 
   const totalAliveNeighbors = [
     northernNeighbor,
