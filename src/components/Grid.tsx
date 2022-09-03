@@ -94,6 +94,8 @@ const INITIAL_GRID = [
 
 function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
   const [grid, setGrid] = React.useState<boolean[][]>(INITIAL_GRID);
+  const [isSimulationRunning, setIsSimulationRunning] =
+    React.useState<boolean>(false);
 
   function toggleCellAtLocation({
     rowIndex,
