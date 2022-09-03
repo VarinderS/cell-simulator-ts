@@ -102,7 +102,7 @@ function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
     rowIndex: number;
     columnIndex: number;
   }) {
-    const gridCopy = [...grid];
+    const gridCopy = copyGrid(grid);
     const currentCellState = grid[rowIndex][columnIndex];
     const toggledCellState = currentCellState ? false : true;
     gridCopy[rowIndex][columnIndex] = toggledCellState;
