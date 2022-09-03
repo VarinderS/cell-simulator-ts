@@ -112,7 +112,7 @@ const INITIAL_GRID = [
   [false, false, false, false, false, false],
 ];
 
-function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
+function Grid({ gridColumns = 6, gridRows = 6, debug = false }: GridProps) {
   const [grid, setGrid] = React.useState<boolean[][]>(INITIAL_GRID);
   const [isSimulationRunning, setIsSimulationRunning] =
     React.useState<boolean>(false);
