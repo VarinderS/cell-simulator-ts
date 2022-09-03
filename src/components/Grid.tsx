@@ -7,6 +7,10 @@ interface GridProps {
   debug?: boolean;
 }
 
+function copyGrid(grid: boolean[][]) {
+  return JSON.parse(JSON.stringify(grid));
+}
+
 function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
   const [grid, setGrid] = React.useState<boolean[][]>([
     [false, true, false, false, false, false],
