@@ -117,6 +117,12 @@ function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
   function onResetClick() {
     setGrid(INITIAL_GRID);
   }
+
+  function onToggleSimulationClick() {
+    const toggledState = isSimulationRunning ? false : true;
+    setIsSimulationRunning(toggledState);
+  }
+
   return (
     <div className="flex flex-col gap-0.5">
       {grid.map((gridCells, rowIndex) => {
