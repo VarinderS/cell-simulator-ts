@@ -109,6 +109,14 @@ function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
     setGrid(gridCopy);
   }
 
+  function onNextGenerationButtonClick() {
+    const nextGenerationGrid = createNextGeneration(grid);
+    setGrid(nextGenerationGrid);
+  }
+
+  function onResetClick() {
+    setGrid(INITIAL_GRID);
+  }
   return (
     <div className="flex flex-col gap-0.5">
       {grid.map((gridCells, rowIndex) => {
