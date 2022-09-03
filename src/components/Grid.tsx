@@ -11,57 +11,76 @@ function copyGrid(grid: boolean[][]) {
   return JSON.parse(JSON.stringify(grid));
 }
 
+function getAliveNeighborsCount({
+  rowIndex,
+  columnIndex,
+  grid,
+}: {
+  rowIndex: number;
+  columnIndex: number;
+  grid: boolean[][];
+}) {
+  const row = grid[rowIndex];
+  const totalRows = grid.length;
+  const totalCells = row.length;
+
+  const northernRowIndex = (rowIndex - 1) % totalRows;
+  const northernRow = grid.at(northernRowIndex);
+
+  const centralRow = row;
+
+  const southernRowIndex = (rowIndex + 1) % totalRows;
+  const southernRow = grid.at(southernRowIndex);
+
+  const northernNeighbor = northernRow?.at(columnIndex);
+
+  const northEasternColumnIndex = (columnIndex + 1) % totalCells;
+  const northEasternNeighbor = northernRow?.at(northEasternColumnIndex);
+
+  const easternColumnIndex = (columnIndex + 1) % totalCells;
+  const easternNeighbor = centralRow.at(easternColumnIndex);
+
+  const southEasternColumnIndex = (columnIndex + 1) % totalCells;
+  const southEasternNeighbor = southernRow?.at(southEasternColumnIndex);
+
+  const southernNeighbor = southernRow?.at(columnIndex);
+
+  const southWesternColumnIndex = (columnIndex - 1) % totalCells;
+  const southWesternNeighbor = southernRow?.at(southWesternColumnIndex);
+
+  const westernColumnIndex = (columnIndex - 1) % totalCells;
+  const westernNeighbor = centralRow?.at(westernColumnIndex);
+
+  const northWesternColumnIndex = (columnIndex - 1) % totalCells;
+  const northWesternNeighbor = northernRow?.at(northWesternColumnIndex);
+
+  const totalAliveNeighbors = [
+    northernNeighbor,
+    northEasternNeighbor,
+    easternNeighbor,
+    southEasternNeighbor,
+    southernNeighbor,
+    southWesternNeighbor,
+    westernNeighbor,
+    northWesternNeighbor,
+  ].filter(Boolean).length;
+
+  return totalAliveNeighbors;
+}
+
 function createNextGeneration(grid: boolean[][]) {
   const gridCopy = copyGrid(grid);
 
-  const totalRows = grid.length;
-
   for (let rowIndex = 0; rowIndex < grid.length; rowIndex++) {
     const row = grid[rowIndex];
-    const totalCells = row.length;
     for (let columnIndex = 0; columnIndex < row.length; columnIndex++) {
       const isCellAlive = grid[rowIndex][columnIndex];
 
-      const northernRowIndex = (rowIndex - 1) % totalRows;
-      const northernRow = grid.at(northernRowIndex);
-
-      const centralRow = row;
-
-      const southernRowIndex = (rowIndex + 1) % totalRows;
-      const southernRow = grid.at(southernRowIndex);
-
-      const northernNeighbor = northernRow?.at(columnIndex);
-
-      const northEasternColumnIndex = (columnIndex + 1) % totalCells;
-      const northEasternNeighbor = northernRow?.at(northEasternColumnIndex);
-
-      const easternColumnIndex = (columnIndex + 1) % totalCells;
-      const easternNeighbor = centralRow.at(easternColumnIndex);
-
-      const southEasternColumnIndex = (columnIndex + 1) % totalCells;
-      const southEasternNeighbor = southernRow?.at(southEasternColumnIndex);
-
-      const southernNeighbor = southernRow?.at(columnIndex);
-
-      const southWesternColumnIndex = (columnIndex - 1) % totalCells;
-      const southWesternNeighbor = southernRow?.at(southWesternColumnIndex);
-
-      const westernColumnIndex = (columnIndex - 1) % totalCells;
-      const westernNeighbor = centralRow?.at(westernColumnIndex);
-
-      const northWesternColumnIndex = (columnIndex - 1) % totalCells;
-      const northWesternNeighbor = northernRow?.at(northWesternColumnIndex);
-
-      const totalAliveNeighbors = [
-        northernNeighbor,
-        northEasternNeighbor,
-        easternNeighbor,
-        southEasternNeighbor,
-        southernNeighbor,
-        southWesternNeighbor,
-        westernNeighbor,
-        northWesternNeighbor,
-      ].filter(Boolean).length;
+      const totalAliveNeighbors = getAliveNeighborsCount({
+        rowIndex,
+        columnIndex,
+        grid,
+      });
 
       if (isCellAlive) {
         if (totalAliveNeighbors < 2) {
