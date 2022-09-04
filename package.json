@@ -28,8 +28,6 @@
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.11.56",
     "@types/react": "^18.0.17",
@@ -42,6 +40,8 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
+    "@testing-library/react": "^13.3.0",
+    "@testing-library/user-event": "^14.4.3",
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "autoprefixer": "^10.4.8",
     "postcss": "^8.4.16",
