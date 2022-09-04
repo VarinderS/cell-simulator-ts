@@ -2,12 +2,6 @@ import React from "react";
 import classNames from "classnames";
 import { copyGrid, createNextGeneration, useInterval } from "./gridHelpers";
 
-interface GridProps {
-  gridColumns?: number;
-  gridRows?: number;
-  debug?: boolean;
-}
-
 const INITIAL_GRID = [
   [false, false, false, false, false, false],
   [false, false, true, false, false, false],
@@ -17,7 +11,7 @@ const INITIAL_GRID = [
   [false, false, false, false, false, false],
 ];
 
-function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
+function Grid() {
   const [grid, setGrid] = React.useState<boolean[][]>(INITIAL_GRID);
   const [isSimulationRunning, setIsSimulationRunning] =
     React.useState<boolean>(false);
@@ -90,13 +84,7 @@ function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
                     onClick={() =>
                       toggleCellAtLocation({ rowIndex, columnIndex })
                     }
-                  >
-                    {debug && (
-                      <span>
-                        {rowIndex} {columnIndex}
-                      </span>
-                    )}
-                  </button>
+                  ></button>
                 );
               })}
             </div>
