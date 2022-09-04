@@ -59,12 +59,14 @@ function Grid({ gridColumns = 6, gridRows = 6, debug = true }: GridProps) {
   }
 
   return (
-    <div>
-      <button onClick={onToggleSimulationClick}>
-        {isSimulationRunning ? "Stop" : "Start"}
-      </button>
-      <button onClick={onNextGenerationButtonClick}>Next</button>
-      <button onClick={onResetClick}>Reset</button>
+    <div className="flex flex-col items-center justify-center h-screen gap-4">
+      <div className="flex gap-2">
+        <button onClick={onToggleSimulationClick}>
+          {isSimulationRunning ? "Stop" : "Start"}
+        </button>
+        <button onClick={onNextGenerationButtonClick}>Next</button>
+        <button onClick={onResetClick}>Reset</button>
+      </div>
 
       <div className="flex flex-col gap-0.5">
         {grid.map((gridCells, rowIndex) => {
