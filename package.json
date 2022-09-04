@@ -60,6 +60,7 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/App.tsx",
       "!src/index.tsx",
+      "!src/reportWebVitals.ts",
       "!<rootDir>/node_modules/"
     ],
     "coverageThreshold": {
